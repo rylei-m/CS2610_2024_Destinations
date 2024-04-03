@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h2>Latest Destinations</h2>
+<div class="destinations">
+    {% for destination in destinations %}
+    <div class="destination">
+        <h3>{{ destination.name }}</h3>
+        <p>{{ destination.review }}</p>
+        <p>Rating: {{ destination.rating }}/5</p>
+        {% if destination.share_publicly %}
+        <p>This destination is shared publicly.</p>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p>No destinations to show.</p>
+    {% endfor %}
+</div>
+{% endblock %}

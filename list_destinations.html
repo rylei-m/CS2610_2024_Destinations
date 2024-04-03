@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h2>My Destinations</h2>
+<ul>
+    {% for destination in destinations %}
+    <li>
+        <a href="{% url 'AssnDestinationsMyApp:edit_destination' destination.id %}">{{ destination.name }}</a>
+        - Share Publicly: {{ destination.share_publicly|yesno:"Yes,No" }}
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'AssnDestinationsMyApp:new_destination' %}">Add New Destination</a>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Log</title>
+    <style>
+        /* CSS for positioning the sign-in status */
+        .signin-status {
+            position: fixed;
+            right: 10px;
+            top: 10px;
+            background-color: #ffdbf4;
+            padding: 5px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="signin-status">
+        {% if request.user %}
+            Signed in as {{ request.user.email }} | <a href="{% url 'AssnDestinationsMyApp:destroy_session' %}">Sign out</a>
+        {% else %}
+            <a href="{% url 'AssnDestinationsMyApp:new_session' %}">Sign in</a> | <a href="{% url 'AssnDestinationsMyApp:new_user' %}">Register</a>
+        {% endif %} 
+    </div>
+    
+<header>
+    <h1>Travel Log</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'AssnDestinationsMyApp:home' %}">Home</a></li>
+            {% if request.user %}
+            <li><a href="{% url 'AssnDestinationsMyApp:list_destinations' %}">My Destinations</a></li>
+            <li><a href="{% url 'AssnDestinationsMyApp:destroy_session' %}">Sign Out</a></li>
+            {% else %}
+
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main>
+    {% if request.user %}
+    <li><a href="{% url 'AssnDestinationsMyApp:new_destination' %}">Add New Destination</a></li>
+    {% else %}
+    <h3>Please Register or Sign in to Add Destinations</h3>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+</main>
+<footer>
+    <p>&copy; 2024 Travel Log</p>
+</footer>
+</body>
+</html>

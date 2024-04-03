@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h2>Sign In</h2>
+<form method="post" action="/sessions/create">
+    {% csrf_token %}
+    <label for="email">Email:</label>
+    <input type="email" name="email" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+    <br>
+    <button type="submit">Sign In</button>
+</form>
+{% endblock %}
